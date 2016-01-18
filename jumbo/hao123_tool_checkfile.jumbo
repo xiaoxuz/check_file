@@ -1,0 +1,63 @@
+JUMBO_REPO="http://jumbo.hao123.com" ## automatically added by jumbo
+#Package by xiaoxuz 
+pkgname=hao123_tool_checkfile
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="hao123 check file tool:use to check online file diff."
+depends=() # missdepends=()
+sources=("${JUMBO_REPO}/packages/${pkgname}/${pkgname}-${pkgver}.tar.gz")
+md5sums=("c4a1c4190904ac655a0b4d5735272649")
+
+#Predefined color and reference ~/.jumbo/bin/jumbo file
+RED="$( echo -e "\e[31m" )"
+YELLOW="$( echo -e "\e[33m" )"]")"
+NORMAL="$( echo -e "\e[0m" )"
+_red()    { echo "$RED""$@""$NORMAL";}
+_yellow()  { echo "$YELLOW""$@""$NORMAL";}
+#package log
+_warning() {
+    echo "$@" >&2
+}
+#package install
+jumbo_install() {
+  
+  toolPath="$HOME/local/bin"
+  
+  if [ ! -d "$toolPath" ]
+  then
+    mkdir -p "$HOME/local/bin/"
+  fi
+
+  if [[ $PATH =~ "$HOME/local/bin" ]]
+  then
+        echo 'PATH already exist'
+  else
+        echo 'PATH=$PATH:$HOME/local/bin/' >> ~/.bashrc
+        echo 'export PATH' >> ~/.bashrc
+        source ~/.bashrc
+  fi
+
+  cd "${srcdir}" 
+
+  mv "check_file" "$HOME/local/bin"
+}
+
+#pachage remove prepare hoook
+jumbo_pre_remove() {
+  _yellow " -> hao123 tool check file remove start..."
+  
+  toolPath="$HOME/local/bin/"
+  
+  if [ ! -d "$toolPath" ]
+  then
+      _warning "there is no tool  dir ,maybe has been moved out."
+      exit -1 
+  else
+      cd "$HOME" 
+      
+      rm -rf "$HOME/local/bin"
+      
+      _yellow " -> check file tool has removed!"
+  fi
+}
+# vim:set ft=sh ts=2 sw=2 et:

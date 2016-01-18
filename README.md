@@ -2,9 +2,13 @@
 
 ##Usage:
  * use to check online file diff.
+ * add jumbo
 
 ##Examples:
- * sh check_file.sh -f a.json -i 192.168.1.1 -d /home/bae/ -t 192.168.1.2 -p /home/bae -b XXX_OPED_noah
+ * sh check_file -f a.json -i 192.168.1.1 -d /home/bae/ -t 192.168.1.2 -p /home/bae -b XXX_OPED_noah
+ 
+##Jumbo
+ * hao123_tool_checkfile.jumbo jam包
 
 ##Param:
  * -f, --file               需要diff的文件.
